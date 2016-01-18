@@ -7,11 +7,12 @@ import locale
 
 #------------------------------------------------------------------Format Plain
 
+
 def format_plain(value):
     """
     Returns value cast to a string.  This is the default for Field.
     """
-    if value == None:
+    if value is None:
         retval = ''
     else:
         retval = str(value)      
@@ -19,19 +20,34 @@ def format_plain(value):
 
 #-----------------------------------------------------------Format Two Decimals
 
+
 def format_two_decimals(value):
     """
     Returns value rounded to two decimal places.    
     """
     foo = locale.setlocale(locale.LC_ALL,('en_US', 'utf8'))
-    if value == None:
+    if value is None:
         retval = ''
     else:
-        retval = locale.format("%.2f", float(value), True)                  
+        retval = locale.format("%.2f", float(value), True)
     return retval
 
+#-----------------------------------------------------------Format Three Decimals
+
+
+def format_three_decimals(value):
+    """
+    Returns value rounded to three decimal places.
+    """
+    foo = locale.setlocale(locale.LC_ALL,('en_US', 'utf8'))
+    if value is None:
+        retval = ''
+    else:
+        retval = locale.format("%.3f", float(value), True)
+    return retval
 
 #------------------------------------------------------------Format US Currency
+
 
 def format_us_currency(value):
     """
@@ -42,10 +58,11 @@ def format_us_currency(value):
     if value is None:
         retval = ''
     else:
-        retval = '$ ' + locale.format("%.2f", float(value), True)                  
+        retval = '$ ' + locale.format("%.2f", float(value), True)
     return retval
 
 #------------------------------------------------------------------Format Title
+
 
 def format_title(value):
     """
@@ -59,6 +76,7 @@ def format_title(value):
 
 #------------------------------------------------------------------Format DMYHM
 
+
 def format_dmyhm(value):
     """
     Returns the date and time in the format DD/MM/YY HH:MM. 
@@ -70,6 +88,7 @@ def format_dmyhm(value):
     return retval
 
 #------------------------------------------------------------Format Report Date 
+
 
 def format_report_date(value):
     """
