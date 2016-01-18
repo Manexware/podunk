@@ -1,0 +1,27 @@
+Metadata-Version: 1.1
+Name: podunk
+Version: 1.0.0
+Summary: UNKNOWN
+Home-page: http://www.github.com/manexware
+Author: Jim Storch - Manuel Vega Ulloa
+Author-email: manuel.vega@manexware.com
+License: GPLv3
+Download-URL: http://www.github.com/manexware
+Description: Reporte personalizado para Odoo.
+        Mas informacinon en : http://www.github.com/manexware
+        
+Keywords: odoo reportlab report
+Platform: UNKNOWN
+Classifier: Development Status :: 1.0.0
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: System Administrators
+Classifier: Intended Audience :: Telecommunications Industry
+Classifier: Intended Audience :: Other Audience
+Classifier: Topic :: System :: Networking
+Classifier: Topic :: Security
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 2.7
