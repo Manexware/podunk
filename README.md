@@ -1,7 +1,7 @@
 A simple library for creating tabular PDF reports in Python using the excellent ReportLab PDF library (www.reportlab.org). Here's an example:
 
-#!/usr/bin/env python
-
+```javascript 
+#!
 from podunk.project.report import Report
 from podunk.widget.table import Table
 from podunk.widget.heading import Heading
@@ -39,105 +39,127 @@ report.author = 'Test Script'
 report.add(Heading('A Sample Payroll'))
 report.add(table)
 report.create()
-Which creates: http://podunk.googlecode.com/files/test.pdf
+```
 
-Info
-Requires: ReportLab PDF library for Python (www.reportlab.com)
-Tested on: Fedora Linux
-License: BSD (see the example font files for their individual licenses).
-Why Podunk?
+Which creates: [https://github.com/eudoro/podunk/tree/master/test/test.pdf](https://github.com/eudoro/podunk/tree/master/test/test.pdf)
+
+# Info
+
+* Requires: ReportLab PDF library for Python (www.reportlab.com)
+* Tested on: Fedora Linux
+* License: BSD (see the example font files for their individual licenses).
+
+# Why Podunk?
+
 I wanted a short, modest name for a short, modest project. PDF stands for Portable Document Format so I scribbled down Podofo and immediately thought of Podunk.
 
-Main Widgetry
-Report
+# Main Widgetry
+## Report
 A Report assembles one or more Headers and Tables into a PDF with a title, date, author, and page numbering on each page.
 
 Properties:
 
-pdf_file - name of the file to create
-title
-author
-page_width - in picas
-page_height - in picas
-left_margin - default 54 picas (3/4")
-top_margin - default 72 picas (1")
-right_margin - default 54 picas (3/4")
-bottom_margin - 72 picas (1")
-canvas - the ReportLab Canvas object in case you need lower level access
+* pdf_file - name of the file to create
+* title
+* author
+* page_width - in picas
+* page_height - in picas
+* left_margin - default 54 picas (3/4")
+* top_margin - default 72 picas (1")
+* right_margin - default 54 picas (3/4")
+* bottom_margin - 72 picas (1")
+* canvas - the ReportLab Canvas object in case you need 
+lower level access
+
 Methods:
 
-Add() - Add a report printable object, currently a Header or Table.
-Create() - create the PDF
-Heading
+* Add() - Add a report printable object, currently a Header or Table.
+* Create() - create the PDF
+
+## Heading
+
 A Heading object is simply a bold, centered Field object (see below) with some vertical padding. It's used much like the HTML tag of the same name -- an optional label for a Table that follows.
 
 Properties:
 
-field - a Field object
-skip - vertical space to pad above the Heading text, default is 10 picas
-Table
+* field - a Field object
+* skip - vertical space to pad above the Heading text, default is 10 picas
+
+## Table
+
 A Table object is where most of the work gets done. You define columns then add rows of data. Columns and rows are printed in the order they are added.
 
 Properties:
 
-row_padding - Space between rows, default is 0
-column_padding - Space between columns, default is 4
+* row_padding - Space between rows, default is 0
+* column_padding - Space between columns, default is 4
+
 Methods:
 
-add_column(column_name [,width]) - Define a new column. Columns are printed in the order added. Returns the Column object created for tweaking.
-add_row(list) - add a row of data provided as a Python list in the same order as the columns were defined.
-add_dict(dictionary) - add a row of data using a dictionary where the keys match column names. Unlike add_row(), you may omit columns and they will be filled with None.
-average_column(column_name) - Fills in the footer with the average of values in the column. None values are skipped.
-count_column(column_name) - Fills in the footer with the count of rows in the column. None values are skipped.
-sum_column(column_name) - Fills in the footer with the sum of values in the column.
-get_header_field(column_name) - return the header Field for specified column name.
-get_row_field(column_name) - return the row Field for specified column name.
-get_footer_field(column_name) - return the footer Field for specified column name.
-auto_width(canvas) - Shrinks each column to fit the width of the widest element, including headers and footers.
-auto_grow(canvas, width) - Scales the entire table to the given width. Columns are proportional to the width of their elements.
-total_width() - Returns the width of Table; all columns + padding.
-Sub Widgetry
+* add_column(column_name [,width]) - Define a new column. Columns are printed in the order added. Returns the Column object created for tweaking.
+* add_row(list) - add a row of data provided as a Python list in the same order as the columns were defined.
+* add_dict(dictionary) - add a row of data using a dictionary where the keys match column names. Unlike add_row(), you may omit columns and they will be filled with None.
+* average_column(column_name) - Fills in the footer with the average of values in the column. None values are skipped.
+* count_column(column_name) - Fills in the footer with the count of rows in the column. None values are skipped.
+* sum_column(column_name) - Fills in the footer with the sum of values in the column.
+* get_header_field(column_name) - return the header Field for specified column name.
+* get_row_field(column_name) - return the row Field for specified column name.
+* get_footer_field(column_name) - return the footer Field for specified column name.
+* auto_width(canvas) - Shrinks each column to fit the width of the widest element, including headers and footers.
+* auto_grow(canvas, width) - Scales the entire table to the given width. Columns are proportional to the width of their elements.
+* total_width() - Returns the width of Table; all columns + padding.
+
+# Sub Widgetry
+
 You can ignore these unless you want to tweak or extend the formatting of table elements.
 
-Field
+## Field
+
 Most of what you display in Podunk is done via Fields. Fields are made up of the following bits:
 
-width - Default is 72 (one inch)
-height - Default is 11
-box - See below
-style - See below
-value - Any Python data type. You would have to provide format functions for really odd ones, though.
-format -See below
-Box
+* width - Default is 72 (one inch)
+* height - Default is 11
+* box - See below
+* style - See below
+* value - Any Python data type. You would have to provide format functions for really odd ones, though.
+* format -See below
+
+## Box
+
 A Box object creates a rectangular background with zero to four borders.
 
 Properties:
 
-left_border - Width in 1/72 of an inch, None = No line (default for all)
-top_border
-right_border
-bottom_border
-border_color - Color in a triple of RGB in the range 0.0 = 1, e.g. (0,1,0) = green
-border_style - Dash on, dash off dublet, (1,0) = solid
-background_color - Color in a triple of RGB in the range 0.0 = 1, e.g. (.5,.5,.5) = half grey
-line_cap - Type of line endings, see the ReportLab docs for more info.
-Style
+* left_border - Width in 1/72 of an inch, None = No line (default for all)
+* top_border
+* right_border
+* bottom_border
+* border_color - Color in a triple of RGB in the range 0.0 = 1, e.g. (0,1,0) = green
+* border_style - Dash on, dash off dublet, (1,0) = solid
+* background_color - Color in a triple of RGB in the range 0.0 = 1, e.g. (.5,.5,.5) = half grey
+* line_cap - Type of line endings, see the ReportLab docs for more info.
+
+## Style
+
 A Style object controls the display of text.
 
 Properties:
 
-font - A Podunk Font object, default is HELVETICA
-bold - default False
-italic - default False
-size - Font size in picas, default is 7
-horizontal_padding - amount of space from horizontal edges in 1/72 of an inch, default is 2
-vertical_padding - amount of space from vertical edges in 1/72 of an inch, default is 3
-color = Color for the font, default is black (.0,.0,.0)
-horizontal_alignment - default is left
-vertical_alignment - default is bottom
-Format
+* font - A Podunk Font object, default is HELVETICA
+* bold - default False
+* italic - default False
+* size - Font size in picas, default is 7
+* horizontal_padding - amount of space from horizontal edges in 1/72 of an inch, default is 2
+* vertical_padding - amount of space from vertical edges in 1/72 of an inch, default is 3
+* color = Color for the font, default is black (.0,.0,.0)
+* horizontal_alignment - default is left
+* vertical_alignment - default is bottom
+
+## Format
+
 Formats are simply functions that accept a field's value and return a string. For example, here's a format that converts a float into US currency:
 
+```javascript
 def format_us_currency(value):
     """
     Returns value in monetary format, 2 decimal places, comma separated
@@ -149,13 +171,16 @@ def format_us_currency(value):
     else:
         retval = '$ ' + locale.format("%.2f", float(value), True)                  
     return retval
-Column
+```
+
+## Column
+
 A Column object is a vertical set of data with a header, zero or more rows, and an optional footer.
 
 Properties:
 
-name
-width - default is 72 picas (1")
-header - A Field object that controls the look/format of the column name
-row - A Field object that controls the look/format of the rows
-footer - A Field object that controls the look/format of the footer. A footer will not print if the value is None (default).
+* name
+* width - default is 72 picas (1")
+* header - A Field object that controls the look/format of the column name
+* row - A Field object that controls the look/format of the rows
+* footer - A Field object that controls the look/format of the footer. A footer will not print if the value is None (default).
