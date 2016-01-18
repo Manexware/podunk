@@ -1,7 +1,7 @@
 A simple library for creating tabular PDF reports in Python using the excellent ReportLab PDF library (www.reportlab.org). Here's an example:
 
 ```javascript 
-#!
+#!/usr/bin/env python
 from podunk.project.report import Report
 from podunk.widget.table import Table
 from podunk.widget.heading import Heading
