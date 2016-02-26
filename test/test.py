@@ -30,9 +30,13 @@ table.average_column('rate')
 table.sum_column('hours')
 table.sum_column('pay')
 
-report = Report('test.pdf')
-report.title = 'Payroll for July 18, 2008'
-report.author = 'Test Script'
-report.add(Heading('A Sample Payroll'))
+report = Report('demo.pdf')
+report.title = 'DEmo de un reporte'
+report.author = 'Manuel Vega'
+heading = Heading('ACADEMIA DE GUERRA NAVAL', 1, True, 14, alignment.CENTER, 4, False, False)
+#field = heading.get_field()
+report.add(heading)
 report.add(table)
+
+report._start_new_page()
 report.create()

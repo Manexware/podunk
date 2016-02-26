@@ -12,10 +12,11 @@ def format_plain(value):
     """
     Returns value cast to a string.  This is the default for Field.
     """
+    foo = locale.setlocale(locale.LC_ALL, ('en_US', 'utf8'))
     if value is None:
         retval = ''
     else:
-        retval = str(value)      
+        retval = value.encode('utf8')
     return retval
 
 #-----------------------------------------------------------Format Two Decimals
@@ -25,7 +26,7 @@ def format_two_decimals(value):
     """
     Returns value rounded to two decimal places.    
     """
-    foo = locale.setlocale(locale.LC_ALL,('en_US', 'utf8'))
+    foo = locale.setlocale(locale.LC_ALL, ('en_US', 'utf8'))
     if value is None:
         retval = ''
     else:
@@ -39,7 +40,7 @@ def format_three_decimals(value):
     """
     Returns value rounded to three decimal places.
     """
-    foo = locale.setlocale(locale.LC_ALL,('en_US', 'utf8'))
+    foo = locale.setlocale(locale.LC_ALL, ('en_US', 'utf8'))
     if value is None:
         retval = ''
     else:

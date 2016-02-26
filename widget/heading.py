@@ -7,18 +7,55 @@ from widget.field import Field
 from prefab.formats import format_title
 from prefab import alignment
 
+
 class Heading(object):
 
-    def __init__(self, value):
+    def __init__(self, value=None, vertical_padding=None, bold=None, size=None, horizontal_alignment=None, skip=None, drew_skip=None, drew_title=None):
     
-        self.field = Field(value)
-        self.field.style.vertical_padding = 2
-        self.field.style.bold = True
-        self.field.style.size = 9
-        self.field.style.horizontal_alignment = alignment.CENTER
-        self.skip = 10
-        self._drew_skip = False
-        self._drew_title = False
+        if value:
+            self.field = Field(value)
+        else:
+            self.field = Field()
+
+        if vertical_padding is not None:
+            self.field.style.vertical_padding = vertical_padding
+        else:
+            self.field.style.vertical_padding = 2
+
+        if bold:
+            self.field.style.bold = True
+        else:
+            self.field.style.bold = bold
+
+        if size is not None:
+            self.field.style.size = size
+        else:
+            self.field.style.size = 10
+
+        if horizontal_alignment:
+            self.field.style.horizontal_alignment = horizontal_alignment
+        else:
+            self.field.style.horizontal_alignment = alignment.CENTER
+
+        if skip is not None:
+            self.skip = skip
+        else:
+            self.skip = 8
+
+        if drew_skip:
+            self._drew_skip = drew_skip
+        else:
+            self._drew_skip = True
+
+        if drew_title:
+            self._drew_title = drew_title
+        else:
+            self._drew_title = False
+
+    #-------------------------------------------------------------------Add Field
+
+    def get_field(self):
+        return self.field
 
     #-----------------------------------------------------------------Draw Some
 
@@ -51,4 +88,3 @@ class Heading(object):
             used = 0
 
         return used
-

@@ -9,16 +9,27 @@ from prefab import alignment
 
 class Heading(object):
 
-    def __init__(self, value):
+    def __init__(self):
     
-        self.field = Field(value)
-        self.field.style.vertical_padding = 2
-        self.field.style.bold = True
-        self.field.style.size = 9
-        self.field.style.horizontal_alignment = alignment.CENTER
-        self.skip = 10
+        self.field = Field()
+        #self.field.style.vertical_padding = 2
+        #self.field.style.bold = True
+        #self.field.style.size = 10
+        #self.field.style.horizontal_alignment = alignment.CENTER
+        self.skip = 8
         self._drew_skip = False
         self._drew_title = False
+
+    #-------------------------------------------------------------------Add Field
+
+    def get_field(self, value):
+        field = self.field
+        self.field.value = value
+        self.field.style.vertical_padding = 2
+        self.field.style.bold = True
+        self.field.style.size = 10
+        self.field.style.horizontal_alignment = alignment.CENTER
+	return field
 
     #-----------------------------------------------------------------Draw Some
 

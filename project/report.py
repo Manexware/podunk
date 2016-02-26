@@ -19,7 +19,7 @@ class Report(object):
         self.pdf_file = pdf_file
         self.title = 'Untitled Report'
         self.author = 'Podunk'
-        self.page_width, self.page_height = paper.LETTER_PORTRAIT
+        self.page_width, self.page_height = paper.LEGAL_LANDSCAPE
 
         self.left_margin = 54
         self.top_margin = 72
@@ -42,8 +42,8 @@ class Report(object):
 
         ## Create the page header
         self.header = Field()
-        self.header.box.bottom_border = 2
-        self.header.box.line_cap = 1
+        #self.header.box.bottom_border = 2
+        #self.header.box.line_cap = 1
         #self.header.box.border_color = (.6,.6,.6)        
         self.header.style.vertical_padding = 6
         self.header.style.bold = True

@@ -17,12 +17,15 @@ prefab/paper.py
 prefab/styles.py
 project/__init__.py
 project/report.py
-project/test.py
+test/test.py
 widget/__init__.py
 widget/box.py
 widget/column.py
 widget/field.py
 widget/font.py
 widget/heading.py
+widget/heading2.py
+widget/heading3.py
+widget/heading4.py
 widget/style.py
 widget/table.py

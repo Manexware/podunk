@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages  # Always prefer setuptools over distutils
 
 long_description = """Reporte personalizado para Odoo.
-Mas informacinon en : http://www.github.com/manexware
+Mas informacion en : http://www.github.com/manexware
 """
 
 setup(name="podunk",
