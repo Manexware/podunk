@@ -1,10 +1,12 @@
 #!/usr/bin/env python
+#  -*- coding: UTF-8 -*-
 from project.report import Report
 from widget.table import Table
 from widget.heading import Heading
 from prefab import alignment
 from prefab.formats import format_us_currency
 from prefab.formats import format_two_decimals
+from prefab.formats import format_report_date
 
 table = Table()
 
@@ -31,12 +33,10 @@ table.sum_column('hours')
 table.sum_column('pay')
 
 report = Report('demo.pdf')
-report.title = 'DEmo de un reporte'
+report.title = ''
 report.author = 'Manuel Vega'
 heading = Heading('ACADEMIA DE GUERRA NAVAL', 1, True, 14, alignment.CENTER, 4, False, False)
-#field = heading.get_field()
 report.add(heading)
 report.add(table)
 
-report._start_new_page()
 report.create()

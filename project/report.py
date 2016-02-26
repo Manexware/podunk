@@ -1,7 +1,11 @@
+#!/usr/bin/python
+#  -*- coding: UTF-8 -*-
+
 #------------------------------------------------------------------------------
 #   file:       podunk/project/report.py
 #   author:     Jim Storch
 #------------------------------------------------------------------------------
+
 
 import datetime
 
@@ -14,17 +18,37 @@ from widget.field import Field
 
 class Report(object):
 
-    def __init__(self, pdf_file=None):
+    def __init__(self, pdf_file=None, left_margin=None, top_margin=None, right_margin=None, bottom_margin=None, paper_type=None):
 
         self.pdf_file = pdf_file
-        self.title = 'Untitled Report'
-        self.author = 'Podunk'
-        self.page_width, self.page_height = paper.LEGAL_LANDSCAPE
+        self.title = ''
+        self.author = 'Manexware S.A.'
+        self.department = 'Research'
 
-        self.left_margin = 54
-        self.top_margin = 72
-        self.right_margin = 54
-        self.bottom_margin = 72
+        if paper_type:
+            self.page_width, self.page_height = paper_type
+        else:
+            self.page_width, self.page_height = paper.LEGAL_LANDSCAPE
+
+        if left_margin is not None:
+            self.left_margin = left_margin
+        else:
+            self.left_margin = 50
+
+        if top_margin is not None:
+            self.top_margin = top_margin
+        else:
+            self.top_margin = 40
+
+        if right_margin is not None:
+            self.right_margin = right_margin
+        else:
+            self.right_margin = 50
+
+        if bottom_margin is not None:
+            self.bottom_margin = bottom_margin
+        else:
+            self.bottom_margin = 40
  
         ## Metrics        
         self._top_edge = self.page_height - 1
@@ -37,8 +61,7 @@ class Report(object):
             self.top_margin + self.bottom_margin )
          
         ## Create the ReportLab Canvas
-        self.canvas = Canvas(self.pdf_file, pagesize = (self.page_width,
-            self.page_height))
+        self.canvas = Canvas(self.pdf_file, pagesize=(self.page_width, self.page_height))
 
         ## Create the page header
         self.header = Field()
@@ -70,6 +93,13 @@ class Report(object):
         #self.date.style.color = (.6,.6,.6)
         #self.date.style.horizontal_padding = 0
         self.date.style.size = 8
+
+        ## Create the department label
+        self.departmentField = Field()
+        self.departmentField.style.vertical_alignment = alignment.TOP
+        #self.date.style.color = (.6,.6,.6)
+        #self.date.style.horizontal_padding = 0
+        self.departmentField.style.size = 8
 
         ## Create the page number label; 'Page X of'
         self.page_num = Field()
@@ -156,19 +186,18 @@ class Report(object):
 
     def _draw_header(self):
         self.header.value = self.title
-        self.header.draw(self.canvas, self.left_margin, self._top_edge - 
-            (self.top_margin * .65) )
+        self.header.draw(self.canvas, self.left_margin, self._top_edge - (self.top_margin * .65))
+        self.date.draw(self.canvas, self._right_edge - 200, self._top_edge - (self.top_margin * .65))
+
 
     #---------------------------------------------------------------Draw Footer
 
     def _draw_footer(self):
         self.footer.value = self.author
-        self.footer.draw(self.canvas, self.left_margin, 
-            self.bottom_margin * .65)
-        self.date.draw(self.canvas, self.left_margin,
-            self.bottom_margin * .65)
-        self.page_num.value = 'Page %d of ' % self._page_count
-        self.page_num.draw(self.canvas, self.left_margin,
-            self.bottom_margin * .65)
+        self.footer.draw(self.canvas, self.left_margin, self.bottom_margin * .65)
+        self.departmentField.value = self.department
+        self.departmentField.draw(self.canvas, self.left_margin, self.bottom_margin * .65)
+        self.page_num.value = 'Página No. %d de ' % self._page_count
+        self.page_num.draw(self.canvas, self.left_margin, self.bottom_margin * .65)
         self.canvas.doForm('last_page') 
 

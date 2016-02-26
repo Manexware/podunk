@@ -1,3 +1,6 @@
+#!/usr/bin/python
+#  -*- coding: UTF-8 -*-
+
 #------------------------------------------------------------------------------
 #   file:       podunk/widget/formats.py
 #   author:     Jim Storch
@@ -16,7 +19,7 @@ def format_plain(value):
     if value is None:
         retval = ''
     else:
-        retval = value.encode('utf8')
+        retval = value
     return retval
 
 #-----------------------------------------------------------Format Two Decimals
@@ -98,8 +101,5 @@ def format_report_date(value):
     if value is None:
         retval = ''
     else:
-        retval = value.strftime('%b %d, %Y - %I:%M %p')
+        retval = value.strftime('%b %d, %Y - %H:%M:%S')
     return retval
-
-
-
