@@ -8,6 +8,7 @@
 
 
 import datetime
+import pytz
 
 from reportlab.pdfgen.canvas import Canvas
 
@@ -18,12 +19,19 @@ from widget.field import Field
 
 class Report(object):
 
-    def __init__(self, pdf_file=None, left_margin=None, top_margin=None, right_margin=None, bottom_margin=None, paper_type=None):
+    def __init__(self,  pdf_file=None, time_zone=None, left_margin=None, top_margin=None, right_margin=None, bottom_margin=None, paper_type=None):
 
         self.pdf_file = pdf_file
         self.title = ''
         self.author = 'Manexware S.A.'
-        self.department = 'Research'
+        self.department = 'OpenEduNav'
+        if time_zone:
+            local_tz = pytz.timezone(time_zone)
+        else:
+            local_tz = pytz.timezone('America/Guayaquil')
+        utc_dt = datetime.datetime.utcnow()
+        local_dt = utc_dt.replace(tzinfo=pytz.utc).astimezone(local_tz)
+        date_time = local_tz.normalize(local_dt)
 
         if paper_type:
             self.page_width, self.page_height = paper_type
@@ -87,7 +95,7 @@ class Report(object):
         self.footer.style.size = 8
 
         ## Create the date label
-        self.date = Field(datetime.datetime.today())
+        self.date = Field(date_time)
         self.date.format = format_report_date
         self.date.style.vertical_alignment = alignment.TOP
         #self.date.style.color = (.6,.6,.6)
