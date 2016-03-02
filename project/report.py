@@ -187,6 +187,7 @@ class Report(object):
     def _start_new_page(self):
         self._page_count += 1
         self.canvas.showPage()
+        #self.canvas.doForm('page %s' % self._page_count)
         self._draw_header()
         self._draw_footer()
 
@@ -207,5 +208,5 @@ class Report(object):
         self.departmentField.draw(self.canvas, self.left_margin, self.bottom_margin * .65)
         self.page_num.value = 'Página No. %d de ' % self._page_count
         self.page_num.draw(self.canvas, self.left_margin, self.bottom_margin * .65)
-        self.canvas.doForm('last_page') 
+        self.canvas.doForm('last_page')
 

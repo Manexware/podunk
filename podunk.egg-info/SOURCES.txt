@@ -24,5 +24,6 @@ widget/column.py
 widget/field.py
 widget/font.py
 widget/heading.py
+widget/pagebreak.py
 widget/style.py
 widget/table.py
