@@ -25,6 +25,7 @@ col = table.add_column('pay')
 col.row.format = format_us_currency
 col.row.style.horizontal_alignment = alignment.RIGHT
 
+
 for x in range(10):
     table.add_row(['Smith, John', 10.0, 80.0, 800.0, ])
 
