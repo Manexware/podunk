@@ -19,7 +19,7 @@ from widget.field import Field
 
 class Report(object):
 
-    def __init__(self,  pdf_file=None, time_zone=None, left_margin=None, top_margin=None, right_margin=None, bottom_margin=None, paper_type=None):
+    def __init__(self,  pdf_file=None, paper_type=None, time_zone=None, left_margin=None, top_margin=None, right_margin=None, bottom_margin=None):
 
         self.pdf_file = pdf_file
         self.title = ''
@@ -36,7 +36,7 @@ class Report(object):
         if paper_type:
             self.page_width, self.page_height = paper_type
         else:
-            self.page_width, self.page_height = paper.LEGAL_LANDSCAPE
+            self.page_width, self.page_height = paper.A4_LANDSCAPE
 
         if left_margin is not None:
             self.left_margin = left_margin

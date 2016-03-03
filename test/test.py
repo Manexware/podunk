@@ -8,6 +8,7 @@ from prefab import alignment
 from prefab.formats import format_us_currency
 from prefab.formats import format_two_decimals
 from prefab.formats import format_report_date
+import prefab.paper as paper
 
 table = Table()
 
@@ -34,7 +35,7 @@ table.average_column('rate')
 table.sum_column('hours')
 table.sum_column('pay')
 
-report = Report('demo.pdf')
+report = Report('demo.pdf', paper.A4_LANDSCAPE)
 report.title = ''
 report.author = 'Manuel Vega'
 heading = Heading('ACADEMIA DE GUERRA NAVAL', 1, True, 14, alignment.CENTER, 4, False, False)
