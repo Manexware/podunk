@@ -75,7 +75,8 @@ def format_title(value):
     if value is None:
         retval = ''
     else:
-        retval = str(value).title()
+        #retval = str(value).title()
+        retval = str(value)
     return retval
 
 #------------------------------------------------------------------Format DMYHM
