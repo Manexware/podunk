@@ -154,8 +154,8 @@ class Table(object):
         ## Draws one line at a time, returning the amount of vertical space
         ## consumed. Returns zero when all drawing is complete.
 
-        xoff = ((right + left ) / 2 ) - (self.total_width() / 2 )
-
+        #xoff = ((right + left ) / 2 ) - (self.total_width() / 2 )
+        xoff = left
         ## Do we need a header?
         if not self._drew_header:
 
