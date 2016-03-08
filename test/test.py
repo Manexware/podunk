@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 #  -*- coding: UTF-8 -*-
-from project.report import Report
-from widget.table import Table
-from widget.heading import Heading
-from widget.pagebreak import PageBreak
-from prefab import alignment
-from prefab.formats import format_us_currency
-from prefab.formats import format_two_decimals
-from prefab.formats import format_report_date
-import prefab.paper as paper
+from manexreport.prefab import alignment
+from manexreport.prefab.formats import format_two_decimals
+from manexreport.prefab.formats import format_us_currency
+from manexreport.project.report import Report
+from manexreport.widget.pagebreak import PageBreak
+from manexreport.widget.table import Table
+
+import manexreport.prefab.paper as paper
+from manexreport.widget.heading import Heading
 
 table = Table()
 
