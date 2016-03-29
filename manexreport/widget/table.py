@@ -23,10 +23,12 @@ class Table(object):
     #----------------------------------------------------------------Add Column
 
     def add_column(self, name, width=None):
+        x = len(self.column_names)
+        fullname = name + str(x)
         column = Column(name, width)
-        self.column_names.append(name)
+        self.column_names.append(fullname)
         self.column_list.append(column)
-        self.column_dict[name] = column
+        self.column_dict[fullname] = column
         return column
 
     #----------------------------------------------------------Get Header Field
@@ -223,7 +225,3 @@ class Table(object):
         for column in self.column_list:
             column.draw_footer(canvas, xoff, yoff)
             xoff += column.width + self.column_padding
-                   
-
-
-

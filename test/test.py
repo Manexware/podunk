@@ -14,15 +14,15 @@ table = Table()
 
 col = table.add_column('employee')
 
-col = table.add_column('rate')
+col = table.add_column('employee')
 col.row.format = format_us_currency
 col.row.style.horizontal_alignment = alignment.RIGHT
 
-col = table.add_column('hours')
+col = table.add_column('employee')
 col.row.format = format_two_decimals
 col.row.style.horizontal_alignment = alignment.RIGHT
 
-col = table.add_column('pay')
+col = table.add_column('employee')
 col.row.format = format_us_currency
 col.row.style.horizontal_alignment = alignment.RIGHT
 
@@ -30,10 +30,10 @@ col.row.style.horizontal_alignment = alignment.RIGHT
 for x in range(10):
     table.add_row(['Smith, John', 10.0, 80.0, 800.0, ])
 
-table.count_column('employee')
-table.average_column('rate')
-table.sum_column('hours')
-table.sum_column('pay')
+table.count_column('employee0')
+table.average_column('employee1')
+table.sum_column('employee2')
+table.sum_column('employee3')
 
 report = Report('demo.pdf', paper.A4_LANDSCAPE)
 report.title = ''

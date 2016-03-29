@@ -97,6 +97,3 @@ class Column(object):
         Set the column width to the widest element found.
         """
         self.width = self.find_width(canvas)
-
-
-  
