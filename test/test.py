@@ -30,10 +30,10 @@ col.row.style.horizontal_alignment = alignment.RIGHT
 for x in range(10):
     table.add_row(['Smith, John', 10.0, 80.0, 800.0, ])
 
-table.count_column('employee0')
-table.average_column('employee1')
-table.sum_column('employee2')
-table.sum_column('employee3')
+table.count_column('employee', 8)
+table.average_column('employee', 1)
+table.sum_column('employee', 2)
+table.sum_column('employee', 3)
 
 report = Report('demo.pdf', paper.A4_LANDSCAPE)
 report.title = ''

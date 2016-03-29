@@ -89,35 +89,47 @@ class Table(object):
 
     #--------------------------------------------------------------Count Column
 
-    def count_column(self, column_name):
-        column = self.column_dict[column_name]
+    def count_column(self, column_name, index):
         count = 0
-        for value in column.value_list:  
-            if value != None:
-                count += 1
-        column.footer.value = 'Count: %d' % count
+        try:
+            column = self.column_dict[column_name + str(index)]
+            for value in column.value_list:
+                if value != None:
+                    count += 1
+            column.footer.value = 'Count: %d' % count
+        except:
+            count += 0
+
 
     #----------------------------------------------------------------Sum Column
 
-    def sum_column(self, column_name):
-        column = self.column_dict[column_name]
+    def sum_column(self, column_name, index):
         sum = 0
-        for value in column.value_list:  
-            if value != None:
-                sum += float(value)
-        column.footer.value = 'Sum: %.2f' % sum
+        try:
+            column = self.column_dict[column_name + str(index)]
+            for value in column.value_list:
+                if value != None:
+                    sum += float(value)
+            column.footer.value = 'Sum: %.2f' % sum
+        except:
+            sum += 0
             
     #------------------------------------------------------------Average Column
 
-    def average_column(self, column_name):
-        column = self.column_dict[column_name]
+    def average_column(self, column_name, index):
         sum = 0
         count = 0
-        for value in column.value_list:  
-            if value != None:
-                sum += float(value)
-                count += 1
-        column.footer.value = 'Avg: %.2f' % (sum / count)
+        try:
+            column = self.column_dict[column_name + str(index)]
+
+            for value in column.value_list:
+                if value != None:
+                    sum += float(value)
+                    count += 1
+            column.footer.value = 'Avg: %.2f' % (sum / count)
+        except:
+            sum += 0
+            count += 0
 
     #-------------------------------------------------------------Get Row Count
     
