@@ -35,12 +35,15 @@ table.average_column('employee', 1)
 table.sum_column('employee', 2)
 table.sum_column('employee', 3)
 
-report = Report('demo.pdf', paper.A4_LANDSCAPE)
+#pdf_file=None, paper_type=None, time_zone=None, left_margin=None, top_margin=None,
+#right_margin=None, bottom_margin=None, logo=None, logo_filename=None, logo_x=None, logo_y=None,
+#logo_width=None, logo_height=None
+report = Report('demo.pdf', paper.A4_PORTRAIT,None,None,None,None,None,False, True,'python_logo.png', 80, 80)
 report.title = ''
 report.author = 'Manuel Vega'
 heading = Heading('ACADEMIA DE GUERRA NAVAL', 1, True, 14, alignment.CENTER, 4, False, False)
+
 report.add(heading)
 report.add(table)
 report.add(PageBreak())
-report.add(Heading('ACADEMIA DE GUERRA NAVAL wwww', 1, True, 14, alignment.CENTER, 4, False, False))
 report.create()

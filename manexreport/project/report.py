@@ -18,12 +18,19 @@ from manexreport.widget.field import Field
 
 
 class Report(object):
-    def __init__(self,  pdf_file=None, paper_type=None, time_zone=None, left_margin=None, top_margin=None, right_margin=None, bottom_margin=None):
+    def __init__(self,  pdf_file=None, paper_type=None, time_zone=None, left_margin=None, top_margin=None,
+                 right_margin=None, bottom_margin=None, date_flag=None, logo=None, logo_filename=None, logo_width=None,
+                 logo_height=None):
 
         self.pdf_file = pdf_file
         self.title = ''
         self.author = 'Manexware S.A.'
         self.department = 'OpenEduNav'
+        self.date_flag = date_flag
+        self.logo = logo
+        self.logo_filename = logo_filename
+        self.logo_width = logo_width
+        self.logo_height = logo_height
         if time_zone:
             local_tz = pytz.timezone(time_zone)
         else:
@@ -149,6 +156,12 @@ class Report(object):
         left = self.left_margin   
         right = self.page_width - self.right_margin
 
+        if self.logo:
+            x = ((self.page_width - self.logo_width) / 2)
+            y = self._top_edge - 100
+            self.canvas.drawImage(self.logo_filename, x, y, self.logo_width, self.logo_height)
+            vspace = self._working_height - self.logo_height
+
         for item in self.draw_list:
            
             while True:
@@ -195,7 +208,8 @@ class Report(object):
     def _draw_header(self):
         self.header.value = self.title
         self.header.draw(self.canvas, self.left_margin, self._top_edge - (self.top_margin * .65))
-        self.date.draw(self.canvas, self._right_edge - 200, self._top_edge - (self.top_margin * .65))
+        if self.date_flag:
+            self.date.draw(self.canvas, self._right_edge - 200, self._top_edge - (self.top_margin * .65))
 
 
     #---------------------------------------------------------------Draw Footer
