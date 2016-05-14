@@ -157,9 +157,7 @@ class Report(object):
         right = self.page_width - self.right_margin
 
         if self.logo:
-            x = ((self.page_width - self.logo_width) / 2)
-            y = self._top_edge - 100
-            self.canvas.drawImage(self.logo_filename, x, y, self.logo_width, self.logo_height)
+            self._draw_logo()
             vspace = self._working_height - self.logo_height
 
         for item in self.draw_list:
@@ -168,7 +166,10 @@ class Report(object):
 
                 if vspace < 1:
                     self._start_new_page()
-                    vspace = self._working_height  
+                    if self.logo:
+                        vspace = self._working_height - self.logo_height
+                    else:
+                        vspace = self._working_height
 
                 yoff = self.bottom_margin + vspace
                 used = item.draw_some(self.canvas, left, right, yoff, vspace)
@@ -202,6 +203,9 @@ class Report(object):
         #self.canvas.doForm('page %s' % self._page_count)
         self._draw_header()
         self._draw_footer()
+        if self.logo:
+            self._draw_logo()
+
 
     #---------------------------------------------------------------Draw Header
 
@@ -210,6 +214,14 @@ class Report(object):
         self.header.draw(self.canvas, self.left_margin, self._top_edge - (self.top_margin * .65))
         if self.date_flag:
             self.date.draw(self.canvas, self._right_edge - 200, self._top_edge - (self.top_margin * .65))
+
+    # ---------------------------------------------------------------Draw Logo
+
+    def _draw_logo(self):
+        if self.logo:
+            x = ((self.page_width - self.logo_width) / 2)
+            y = self._top_edge - 100
+            self.canvas.drawImage(self.logo_filename, x, y, self.logo_width, self.logo_height)
 
 
     #---------------------------------------------------------------Draw Footer

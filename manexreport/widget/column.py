@@ -59,7 +59,7 @@ class Column(object):
     def draw_row(self, canvas, x, y, row_number):
 
         if row_number % 2:
-            self.row.box.background_color = (.90,1,.85)
+            self.row.box.background_color = (.9, .9, .9)
         else:
              self.row.box.background_color = (1,1,1)
 
