@@ -19,7 +19,10 @@ from manexreport.widget.field import Field
 
 class Report(object):
     def __init__(self,  pdf_file=None, paper_type=None, time_zone=None, left_margin=None, top_margin=None,
-                 right_margin=None, bottom_margin=None, date_flag=None, logo=None, logo_filename=None, logo_width=None,
+                 right_margin=None, bottom_margin=None, date_flag=None, flag_footer=None,
+                 logo=None,
+                 logo_filename=None,
+                 logo_width=None,
                  logo_height=None):
 
         self.pdf_file = pdf_file
@@ -31,6 +34,7 @@ class Report(object):
         self.logo_filename = logo_filename
         self.logo_width = logo_width
         self.logo_height = logo_height
+        self.flag_footer = flag_footer
         if time_zone:
             local_tz = pytz.timezone(time_zone)
         else:
@@ -151,7 +155,8 @@ class Report(object):
         self.canvas.setTitle(self.title)
         self.canvas.setSubject('Python Generated Report')
         self._draw_header()
-        self._draw_footer()
+        if self.flag_footer:
+            self._draw_footer()
         vspace = self._working_height
         left = self.left_margin   
         right = self.page_width - self.right_margin
@@ -202,7 +207,8 @@ class Report(object):
         self.canvas.showPage()
         #self.canvas.doForm('page %s' % self._page_count)
         self._draw_header()
-        self._draw_footer()
+        if self.flag_footer:
+            self._draw_footer()
         if self.logo:
             self._draw_logo()
 
