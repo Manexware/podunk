@@ -16,6 +16,15 @@ font_info = {
 
 HELVETICA = Font(font_info)
 
+font_info = {
+    'plain':'Helvetica',
+    'bold':'Helvetica-Bold',
+    'italic':'Helvetica-Oblique',
+    'bold_italic':'Helvetica-BoldOblique',
+    }
+
+ARIAL = Font(font_info)
+
 #-----------------------------------------------------------------------Courier
 
 font_info = {

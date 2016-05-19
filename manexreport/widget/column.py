@@ -21,7 +21,7 @@ class Column(object):
         else:
             self.width = 72
 
-        self.height = 11
+        self.height = 9
 
         ## Header
         self.header = Field(name)
@@ -34,10 +34,11 @@ class Column(object):
 
         ## Row
         self.row = Field()
+        self.row.style.bold = False
 
         ## Footer
         self.footer = Field()
-        #self.footer.style.bold = True
+        self.footer.style.bold = True
         self.footer.box.top_border = 1         
         self.footer.style.horizontal_alignment = alignment.CENTER
         self.footer.value = None
@@ -56,14 +57,18 @@ class Column(object):
 
     #------------------------------------------------------------------Draw Row
 
-    def draw_row(self, canvas, x, y, row_number):
+    def draw_row(self, canvas, x, y, row_number, flag, row_number_flag):
 
-        if row_number % 2:
+        if row_number % 2 and flag:
             self.row.box.background_color = (.9, .9, .9)
         else:
              self.row.box.background_color = (1,1,1)
 
-        self.row.value = self.value_list[row_number] 
+        self.row.value = self.value_list[row_number]
+        if row_number == row_number_flag:
+            self.row.style.bold = True
+        else:
+            self.row.style.bold = False
         self.row.width = self.width
         self.row.height = self.height
         self.row.draw(canvas, x, y)

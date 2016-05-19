@@ -5,19 +5,19 @@
 
 from manexreport.prefab import color
 from manexreport.prefab import alignment
-from manexreport.prefab.fonts import HELVETICA
+from manexreport.prefab.fonts import ARIAL
 
 
 class Style(object):
 
     def __init__(self):
 
-        self.font = HELVETICA
+        self.font = ARIAL
         self.bold = False
         self.italic = False
-        self.size = 7
-        self.horizontal_padding = 2
-        self.vertical_padding = 3
+        self.size = 8
+        self.horizontal_padding = 1
+        self.vertical_padding = 1
         self.color = color.BLACK
         self.horizontal_alignment = alignment.LEFT
         self.vertical_alignment = alignment.BOTTOM

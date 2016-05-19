@@ -9,7 +9,11 @@ from manexreport.widget.field import Field
 
 class Heading(object):
 
-    def __init__(self, value=None, vertical_padding=None, bold=None, size=None, horizontal_alignment=None, skip=None, drew_skip=None, drew_title=None):
+    def __init__(self, value=None, vertical_padding=None, bold=None, size=None,
+                 horizontal_alignment=None,
+                 skip=None,
+                 drew_skip=None,
+                 drew_title=None):
     
         if value:
             self.field = Field(value)

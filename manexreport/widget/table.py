@@ -19,6 +19,8 @@ class Table(object):
         self._drew_header = False
         self._current_row = 0
         self._drew_footer = False
+        self.flag = True
+        self.row_number_flag = -1
 
     #----------------------------------------------------------------Add Column
 
@@ -131,6 +133,15 @@ class Table(object):
             sum += 0
             count += 0
 
+    # ------------------------------------------------------------Bold Column
+
+    def bold_column(self, column_name, index):
+        try:
+            column = self.column_dict[column_name + str(index)]
+            column.row.style.bold = True
+        except:
+            row = 1
+
     #-------------------------------------------------------------Get Row Count
     
     def get_row_count(self):
@@ -228,7 +239,7 @@ class Table(object):
 
     def _draw_row(self, canvas, xoff, yoff, row_number):
         for column in self.column_list:
-            column.draw_row(canvas, xoff, yoff, row_number)
+            column.draw_row(canvas, xoff, yoff, row_number, self.flag, self.row_number_flag)
             xoff += column.width + self.column_padding
 
     #---------------------------------------------------------------Draw Footer
@@ -237,3 +248,15 @@ class Table(object):
         for column in self.column_list:
             column.draw_footer(canvas, xoff, yoff)
             xoff += column.width + self.column_padding
+
+    #---------------------------------------------------------------Set drew_header
+
+    def set_drew_header(self, drew_header):
+        self._drew_header = drew_header
+
+    # ---------------------------------------------------------------Set drew_header
+
+    def set_flag(self, flag, row_number=None):
+        self.flag = flag
+        if row_number:
+            self.row_number_flag = row_number
