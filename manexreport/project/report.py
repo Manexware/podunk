@@ -17,6 +17,7 @@ from manexreport.prefab import paper
 from manexreport.widget.field import Field
 
 
+
 class Report(object):
     def __init__(self,
                  pdf_file=None,

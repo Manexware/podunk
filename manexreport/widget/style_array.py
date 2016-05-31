@@ -1,14 +1,15 @@
-# ------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 #   file:       podunk/widget/style.py
 #   author:     Jim Storch
-# ------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 
 from manexreport.prefab import color
 from manexreport.prefab import alignment
 from manexreport.prefab.fonts import ARIAL
 
 
-class Style(object):
+class StyleArray(object):
+
     def __init__(self):
 
         self.font = ARIAL
@@ -21,7 +22,7 @@ class Style(object):
         self.horizontal_alignment = alignment.LEFT
         self.vertical_alignment = alignment.BOTTOM
 
-    # ------------------------------------------------------------------Get Face
+    #------------------------------------------------------------------Get Face
 
     def get_face(self):
         """
@@ -32,32 +33,36 @@ class Style(object):
         elif self.bold and not self.italic:
             face = self.font.bold
         elif not self.bold and self.italic:
-            face = self.font.italic
+            face = self.font.italic        
         else:
             face = self.font.plain
         return face
-
-    # -----------------------------------------------------------------Get Width
+    
+    #-----------------------------------------------------------------Get Width
 
     def get_width(self, canvas, text):
         """
         Return the width of a given string at current font face/size.
         Includes padding on the left and right.
         """
-        face = self.get_face()
-        return canvas.stringWidth(text, face, self.size) + (
+        face = self.font.bold
+        data = ''
+        for word in enumerate(text):
+            data = '%s ' % word
+
+        return canvas.stringWidth(data, face, self.size) + (
             self.horizontal_padding * 2)
 
-    # ----------------------------------------------------------------Get Height
+    #----------------------------------------------------------------Get Height
 
     def get_height(self):
         """
         Return the height of a given string at current font size.
         Includes padding for the top and bottom.
-        """
+        """     
         return self.size + (self.vertical_padding * 2)
 
-    # ------------------------------------------------------------Get Dimensions
+    #------------------------------------------------------------Get Dimensions
 
     def get_dimensions(self, canvas, text):
         """
@@ -66,40 +71,37 @@ class Style(object):
         """
         width = self.get_width(canvas, text)
         height = self.get_height()
-        return width, height
+        return width,height
 
-    # ----------------------------------------------------------------------Draw
+    #----------------------------------------------------------------------Draw
 
     def draw(self, canvas, text, x, y, width, height):
-
+        
         canvas.saveState()
-        face = self.get_face()
 
-        ## Set the font characteristics
-        canvas.setFont(self.get_face(), self.size)
+        ## Set the font characteristics      
+        canvas.setFont(self.font.bold, self.size)
         canvas.setFillColor(self.color)
 
-        ## Get the vertical alignment
+        ## Get the vertical alignment       
         if self.vertical_alignment == alignment.BOTTOM:
             y_off = y + self.vertical_padding
 
         elif self.vertical_alignment == alignment.TOP:
-            y_off = (y + height) - (self.vertical_padding + self.size)
+            y_off = ( y + height ) - ( self.vertical_padding + self.size)
 
-        else:  ## alignment.CENTERED
-            y_off = y + ((height / 2) - (self.size / 2))
+        else: ## alignment.CENTERED
+            y_off = y + ( ( height / 2 ) - ( self.size / 2 ) )
 
         ## Now the horizontal
-        if self.horizontal_alignment == alignment.RIGHT:
-            x_off = (x + width) - self.horizontal_padding
-            canvas.drawRightString(x_off, y_off, text)
-
-        elif self.horizontal_alignment == alignment.LEFT:
-            x_off = x + self.horizontal_padding
-            canvas.drawString(x_off, y_off, text)
-
-        else:  ## alignment.CENTERED
-            x_off = x + (width / 2)
-            canvas.drawCentredString(x_off, y_off, text)
+        x_off = x + self.horizontal_padding
+        for index, word in enumerate(text):
+            canvas.drawString(x_off, y_off, word)
+            if index % 2 == 0 :
+                x_off += canvas.stringWidth(word, self.font.bold, self.size) + 2
+                canvas.setFont(self.font.plain, self.size)
+            else:
+                x_off += canvas.stringWidth(word, self.font.plain, self.size) + 2
+                canvas.setFont(self.font.bold, self.size)
 
         canvas.restoreState()
