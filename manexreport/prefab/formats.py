@@ -102,5 +102,35 @@ def format_report_date(value):
     if value is None:
         retval = ''
     else:
-        retval = value.strftime('%b %d, %Y - %H:%M:%S')
+        month = get_month_spanish_fullname(value.strftime('%m'))
+        retval = '%s/%s/%s%s' % (value.strftime('%d'), month, value.strftime('%Y'), value.strftime(' - %H:%M:%S'))
     return retval
+
+
+def get_month_spanish_fullname(month):
+    month_spanish = ''
+    if month == u'01':
+        month_spanish = 'Enero'
+    if month == u'02':
+        month_spanish = 'Febrero'
+    if month == u'03':
+        month_spanish = 'Marzo'
+    if month == u'04':
+        month_spanish = 'Abril'
+    if month == u'05':
+        month_spanish = 'Mayo'
+    if month == u'06':
+        month_spanish = 'Junio'
+    if month == u'07':
+        month_spanish = 'Julio'
+    if month == u'08':
+        month_spanish = 'Agosto'
+    if month == u'09':
+        month_spanish = 'Septiembre'
+    if month == u'10':
+        month_spanish = 'Octubre'
+    if month == u'11':
+        month_spanish = 'Noviembre'
+    if month == u'12':
+        month_spanish = 'Diciembre'
+    return month_spanish

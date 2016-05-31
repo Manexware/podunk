@@ -126,7 +126,7 @@ class Report(object):
         self.date.style.vertical_alignment = alignment.TOP
         # self.date.style.color = (.6,.6,.6)
         # self.date.style.horizontal_padding = 0
-        self.date.style.size = 8
+        self.date.style.size = 9
 
         ## Create the department label
         self.departmentField = Field()
