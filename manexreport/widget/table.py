@@ -20,7 +20,7 @@ class Table(object):
         self._current_row = 0
         self._drew_footer = False
         self.flag = True
-        self.row_number_flag = -1
+        self.row_number_flag = [-1]
 
     #----------------------------------------------------------------Add Column
 

@@ -65,7 +65,7 @@ class Column(object):
              self.row.box.background_color = (1,1,1)
 
         self.row.value = self.value_list[row_number]
-        if row_number == row_number_flag:
+        if row_number in row_number_flag:
             self.row.style.bold = True
         else:
             self.row.style.bold = False

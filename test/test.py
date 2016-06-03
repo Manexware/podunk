@@ -36,7 +36,7 @@ for x in range(10):
 #table.average_column('employee', 1)
 #table.sum_column('employee', 2)
 #table.sum_column('employee', 3)
-table.bold_column('employee', 2)
+table.set_flag(False, [3,4,5])
 
 table2 = Table()
 
