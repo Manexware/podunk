@@ -26,7 +26,7 @@ class Table(object):
 
     def add_column(self, name, width=None):
         x = len(self.column_names)
-        fullname = name + str(x)
+        fullname = str(name) + str(x)
         column = Column(name, width)
         self.column_names.append(fullname)
         self.column_list.append(column)
