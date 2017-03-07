@@ -16,7 +16,7 @@ class Style(object):
         self.italic = False
         self.size = 8
         self.horizontal_padding = 1
-        self.vertical_padding = 1
+        self.vertical_padding = 2
         self.color = color.BLACK
         self.horizontal_alignment = alignment.LEFT
         self.vertical_alignment = alignment.BOTTOM

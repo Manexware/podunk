@@ -12,7 +12,7 @@ class Table(object):
         self.column_names = []
         self.column_list = []
         self.column_dict = {}
-        self.row_padding = 0
+        self.row_padding = 1
         self.column_padding = 4
 
         ## Used when drawing
