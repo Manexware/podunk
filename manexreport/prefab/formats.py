@@ -1,14 +1,12 @@
-#!/usr/bin/python
-#  -*- coding: UTF-8 -*-
 
-#------------------------------------------------------------------------------
+###############################################################################
 #   file:       podunk/widget/formats.py
 #   author:     Jim Storch, Manuel Vega
-#------------------------------------------------------------------------------
+###############################################################################
 
 import locale
 
-#------------------------------------------------------------------Format Plain
+# ------------------------------------------------------------------Format Plain
 
 
 def format_plain(value):
@@ -22,7 +20,7 @@ def format_plain(value):
         retval = value
     return retval
 
-#-----------------------------------------------------------Format Two Decimals
+# -----------------------------------------------------------Format Two Decimals
 
 
 def format_two_decimals(value):
@@ -36,7 +34,7 @@ def format_two_decimals(value):
         retval = locale.format("%.2f", float(value), True)
     return retval
 
-#-----------------------------------------------------------Format Three Decimals
+# -----------------------------------------------------------Format Three Decimals
 
 
 def format_three_decimals(value):
@@ -50,7 +48,7 @@ def format_three_decimals(value):
         retval = locale.format("%.3f", float(value), True)
     return retval
 
-#------------------------------------------------------------Format US Currency
+# -----------------------------------------------------------Format US Currency
 
 
 def format_us_currency(value):
@@ -65,7 +63,7 @@ def format_us_currency(value):
         retval = '$ ' + locale.format("%.2f", float(value), True)
     return retval
 
-#------------------------------------------------------------------Format Title
+# ------------------------------------------------------------------Format Title
 
 
 def format_title(value):
@@ -75,11 +73,11 @@ def format_title(value):
     if value is None:
         retval = ''
     else:
-        #retval = str(value).title()
+        # retval = str(value).title()
         retval = str(value)
     return retval
 
-#------------------------------------------------------------------Format DMYHM
+# ------------------------------------------------------------------Format DMYHM
 
 
 def format_dmyhm(value):
@@ -92,7 +90,7 @@ def format_dmyhm(value):
         retval = value.strftime('%m/%d/%y %H:%M')
     return retval
 
-#------------------------------------------------------------Format Report Date 
+# ------------------------------------------------------------Format Report Date
 
 
 def format_report_date(value):

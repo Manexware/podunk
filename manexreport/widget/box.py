@@ -1,7 +1,8 @@
-#------------------------------------------------------------------------------
+
+###############################################################################
 #   file:       podunk/widget/box.py
 #   author:     Jim Storch
-#------------------------------------------------------------------------------
+###############################################################################
 
 from manexreport.prefab import color
 
@@ -21,42 +22,40 @@ class Box(object):
         self.background_color = None
         self.line_cap = 2
 
-    #----------------------------------------------------------------------Draw
+    # ----------------------------------------------------------------------Draw
 
     def draw(self, canvas, x, y, width, height):
 
         canvas.saveState()
 
-        ## draw the background rectangle
-        if self.background_color != None:
+        # draw the background rectangle
+        if self.background_color is not None:
             canvas.setFillColor(self.background_color)
             canvas.rect(x,y, width, height, fill=1, stroke=0)
 
-        ## draw the borders
+        # draw the borders
         canvas.setStrokeColor(self.border_color)
         canvas.setDash(self.border_style)
         canvas.setLineCap(self.line_cap)
 
-        ## Left border
+        # Left border
         if self.left_border:
             canvas.setLineWidth(self.left_border)
             canvas.line(x,y,x,y+height)
 
-        ## Top border
+        # Top border
         if self.top_border:
             canvas.setLineWidth(self.top_border)
             canvas.line(x,y+height,x+width,y+height)
 
-        ## Right border
+        # Right border
         if self.right_border:
             canvas.setLineWidth(self.right_border)
             canvas.line(x+width,y,x+width,y+height)
         
-        ## Bottom border
+        # Bottom border
         if self.bottom_border:
             canvas.setLineWidth(self.bottom_border)
             canvas.line(x,y,x+width,y)
         
         canvas.restoreState()       
-
-

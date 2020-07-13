@@ -1,11 +1,8 @@
-#!/usr/bin/python
-#  -*- coding: UTF-8 -*-
 
-# ------------------------------------------------------------------------------
+###############################################################################
 #   file:       podunk/project/report.py
 #   author:     Jim Storch, Manuel Vega
-# ------------------------------------------------------------------------------
-
+###############################################################################
 
 import datetime
 
@@ -15,7 +12,6 @@ from manexreport.prefab.formats import format_report_date
 from reportlab.pdfgen.canvas import Canvas
 from manexreport.prefab import paper
 from manexreport.widget.field import Field
-
 
 
 class Report(object):
@@ -45,7 +41,6 @@ class Report(object):
         self.logo_width = logo_width
         self.logo_height = logo_height
         self.flag_footer = flag_footer
-
 
         if time_zone:
             local_tz = pytz.timezone(time_zone)
@@ -84,7 +79,7 @@ class Report(object):
         else:
             self.logo_top_margin = 70
 
-        ## Metrics
+        # Metrics
         self._top_edge = self.page_height - 1
         self._right_edge = self.page_width - 1
         self._bottom_edge = 0
@@ -94,10 +89,10 @@ class Report(object):
         self._working_height = self.page_height - (
             self.top_margin + self.bottom_margin)
 
-        ## Create the ReportLab Canvas
+        # Create the ReportLab Canvas
         self.canvas = Canvas(self.pdf_file, pagesize=(self.page_width, self.page_height))
 
-        ## Create the page header
+        # Create the page header
         self.header = Field()
         # self.header.box.bottom_border = 2
         # self.header.box.line_cap = 1
@@ -109,7 +104,7 @@ class Report(object):
         self.header.style.horizontal_alignment = alignment.RIGHT
         self.header.width = self._working_width
 
-        ## Create the page footer
+        # Create the page footer
         self.footer = Field()
         self.footer.box.top_border = 1
         self.footer.box.line_cap = 1
@@ -120,7 +115,7 @@ class Report(object):
         self.footer.width = self._working_width
         self.footer.style.size = 8
 
-        ## Create the date label
+        # Create the date label
         self.date = Field(date_time)
         self.date.format = format_report_date
         self.date.style.vertical_alignment = alignment.TOP
@@ -128,14 +123,14 @@ class Report(object):
         # self.date.style.horizontal_padding = 0
         self.date.style.size = 9
 
-        ## Create the department label
+        # Create the department label
         self.departmentField = Field()
         self.departmentField.style.vertical_alignment = alignment.TOP
         # self.date.style.color = (.6,.6,.6)
         # self.date.style.horizontal_padding = 0
         self.departmentField.style.size = 8
 
-        ## Create the page number label; 'Page X of'
+        # Create the page number label; 'Page X of'
         self.page_num = Field()
         self.page_num.style.horizontal_alignment = alignment.RIGHT
         self.page_num.style.vertical_alignment = alignment.TOP
@@ -144,7 +139,7 @@ class Report(object):
         self.page_num.horizontal_padding = 0
         self.page_num.style.size = 8
 
-        ## Create the last page number label
+        # Create the last page number label
         self.last_page = Field()
         # self.last_page.style.horizontal_alignment = alignment.LEFT
         self.last_page.style.vertical_alignment = alignment.TOP
@@ -153,7 +148,7 @@ class Report(object):
         self.last_page.horizontal_padding = 0
         self.last_page.style.size = 8
 
-        ## Objects to be drawn
+        # Objects to be drawn
         self.draw_list = []
 
         self._page_count = 1
@@ -161,7 +156,7 @@ class Report(object):
     # -----------------------------------------------------------------------Add
 
     def add(self, item):
-        ## Add any object that, duck-typingly, has a 'draw_some' method
+        # Add any object that, duck-typingly, has a 'draw_some' method
         self.draw_list.append(item)
 
     # --------------------------------------------------------------------Create
@@ -201,9 +196,9 @@ class Report(object):
                 else:
                     vspace -= used
 
-        ## Add the numbering for last page
-        ## We have to do this as a PDF 'Form' object since we don't know in
-        ## advance how many pages there will be.
+        # Add the numbering for last page
+        # We have to do this as a PDF 'Form' object since we don't know in
+        # advance how many pages there will be.
         self.canvas.beginForm('last_page')
         self.canvas.saveState()
         self.last_page.value = '%d' % self._page_count
@@ -213,7 +208,7 @@ class Report(object):
         self.canvas.restoreState()
         self.canvas.endForm()
 
-        ## Close the PDF
+        # Close the PDF
         self.canvas.save()
 
     # ----------------------------------------------------------------Start Page

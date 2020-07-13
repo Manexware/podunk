@@ -1,7 +1,8 @@
-#------------------------------------------------------------------------------
+
+###############################################################################
 #   file:       podunk/widget/heading.py
 #   author:     Jim Storch
-#------------------------------------------------------------------------------
+###############################################################################
 
 from manexreport.prefab import alignment
 from manexreport.widget.field import Field
@@ -55,12 +56,12 @@ class Heading(object):
         else:
             self._drew_title = False
 
-    #-------------------------------------------------------------------Add Field
+    # -------------------------------------------------------------------Add Field
 
     def get_field(self):
         return self.field
 
-    #-----------------------------------------------------------------Draw Some
+    # -----------------------------------------------------------------Draw Some
 
     def draw_some(self, canvas, left, right, yoff, vspace):
 
@@ -72,21 +73,20 @@ class Heading(object):
                 used = vspace
             self._drew_skip = True
 
-
         elif not self._drew_title:
             height = self.field.get_height()
-            ## Is there enought room for the title?
+            # Is there enought room for the title?
             if height < vspace:
                 self.field.width = right - left
                 self.field.draw(canvas, left, yoff)
                 self._drew_title = True
                 used = height
 
-            ## If not, force a new page
+            # If not, force a new page
             else:
                 used = vspace
                 
-        ## We're done            
+        # We're done
         else:
             used = 0
 

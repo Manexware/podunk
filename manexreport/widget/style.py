@@ -1,7 +1,8 @@
-# ------------------------------------------------------------------------------
+
+###############################################################################
 #   file:       podunk/widget/style.py
 #   author:     Jim Storch
-# ------------------------------------------------------------------------------
+###############################################################################
 
 from manexreport.prefab import color
 from manexreport.prefab import alignment
@@ -75,21 +76,21 @@ class Style(object):
         canvas.saveState()
         face = self.get_face()
 
-        ## Set the font characteristics
+        # Set the font characteristics
         canvas.setFont(self.get_face(), self.size)
         canvas.setFillColor(self.color)
 
-        ## Get the vertical alignment
+        # Get the vertical alignment
         if self.vertical_alignment == alignment.BOTTOM:
             y_off = y + self.vertical_padding
 
         elif self.vertical_alignment == alignment.TOP:
             y_off = (y + height) - (self.vertical_padding + self.size)
 
-        else:  ## alignment.CENTERED
+        else:  # alignment.CENTERED
             y_off = y + ((height / 2) - (self.size / 2))
 
-        ## Now the horizontal
+        # Now the horizontal
         if self.horizontal_alignment == alignment.RIGHT:
             x_off = (x + width) - self.horizontal_padding
             canvas.drawRightString(x_off, y_off, text)
@@ -98,7 +99,7 @@ class Style(object):
             x_off = x + self.horizontal_padding
             canvas.drawString(x_off, y_off, text)
 
-        else:  ## alignment.CENTERED
+        else:  # alignment.CENTERED
             x_off = x + (width / 2)
             canvas.drawCentredString(x_off, y_off, text)
 

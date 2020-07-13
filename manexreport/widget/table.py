@@ -1,9 +1,11 @@
-#------------------------------------------------------------------------------
+
+###############################################################################
 #   file:       podunk/widget/table.py
 #   author:     Jim Storch
-#------------------------------------------------------------------------------
+###############################################################################
 
 from manexreport.widget.column import Column
+
 
 class Table(object):
 
@@ -15,14 +17,14 @@ class Table(object):
         self.row_padding = 1
         self.column_padding = 4
 
-        ## Used when drawing
+        # Used when drawing
         self._drew_header = False
         self._current_row = 0
         self._drew_footer = False
         self.flag = True
         self.row_number_flag = [-1]
 
-    #----------------------------------------------------------------Add Column
+    # ----------------------------------------------------------------Add Column
 
     def add_column(self, name, width=None):
         x = len(self.column_names)
@@ -33,7 +35,7 @@ class Table(object):
         self.column_dict[fullname] = column
         return column
 
-    #----------------------------------------------------------Get Header Field
+    # ----------------------------------------------------------Get Header Field
 
     def get_header_field(self, column_name):
         """
@@ -42,7 +44,7 @@ class Table(object):
         """
         return self.column_dict[column_name].header
 
-    #------------------------------------------------------------Get Data Field
+    # ------------------------------------------------------------Get Data Field
 
     def get_row_field(self, column_name):
         """
@@ -51,7 +53,7 @@ class Table(object):
         """
         return self.column_dict[column_name].row
 
-    #----------------------------------------------------------Get Footer Field
+    # ----------------------------------------------------------Get Footer Field
 
     def get_footer_field(self, column_name):
         """
@@ -60,7 +62,7 @@ class Table(object):
         """
         return self.column_dict[column_name].footer
 
-    #-------------------------------------------------------------------Add Row
+    # -------------------------------------------------------------------Add Row
 
     def add_row(self, values):
         """
@@ -70,7 +72,7 @@ class Table(object):
         for index in range(len(values)):
             self.column_dict[self.column_names[index]].append(values[index])
 
-    #------------------------------------------------------------------Add Dict
+    # ------------------------------------------------------------------Add Dict
 
     def add_dict(self, kwargs):
         """
@@ -80,16 +82,16 @@ class Table(object):
 
         keys = kwargs.keys()
 
-        ## Insert passed values
+        # Insert passed values
         for key in keys:
             self.column_dict[key].append(kwargs[key])
 
-        ## Insert blanks for omitted columns
+        # Insert blanks for omitted columns
         for column_name in self.column_names:
             if column_name not in keys:
                 self.column_dict[column_name].append(None)
 
-    #--------------------------------------------------------------Count Column
+    # --------------------------------------------------------------Count Column
 
     def count_column(self, column_name, index):
         count = 0
@@ -103,7 +105,7 @@ class Table(object):
             count += 0
 
 
-    #----------------------------------------------------------------Sum Column
+    # ----------------------------------------------------------------Sum Column
 
     def sum_column(self, column_name, index):
         sum = 0
@@ -116,7 +118,7 @@ class Table(object):
         except:
             sum += 0
             
-    #------------------------------------------------------------Average Column
+    # ------------------------------------------------------------Average Column
 
     def average_column(self, column_name, index):
         sum = 0
@@ -142,18 +144,18 @@ class Table(object):
         except:
             row = 1
 
-    #-------------------------------------------------------------Get Row Count
+    # -------------------------------------------------------------Get Row Count
     
     def get_row_count(self):
         return len(self.column_list[0].value_list)
 
-    #-----------------------------------------------------------------Auto Size
+    # -----------------------------------------------------------------Auto Size
 
     def auto_width(self, canvas):
         for column in self.column_list:
             column.auto_width(canvas)
  
-    #-----------------------------------------------------------------Auto Grow
+    # -----------------------------------------------------------------Auto Grow
 
     def auto_grow(self, canvas, width):
         padding = (len(self.column_names) -1 ) * self.column_padding
@@ -164,7 +166,7 @@ class Table(object):
             column.width *= mult
         #print self.total_width()      
 
-    #---------------------------------------------------------------Total Width
+    # ---------------------------------------------------------------Total Width
 
     def total_width(self):
         width = 0
@@ -172,19 +174,19 @@ class Table(object):
             width += column.width + self.column_padding
         return width - self.column_padding
       
-    #-----------------------------------------------------------------Draw Some
+    # -----------------------------------------------------------------Draw Some
 
     def draw_some(self, canvas, left, right, yoff, vspace):
             
-        ## Draws one line at a time, returning the amount of vertical space
-        ## consumed. Returns zero when all drawing is complete.
+        # Draws one line at a time, returning the amount of vertical space
+        # consumed. Returns zero when all drawing is complete.
 
-        #xoff = ((right + left ) / 2 ) - (self.total_width() / 2 )
+        # xoff = ((right + left ) / 2 ) - (self.total_width() / 2 )
         xoff = left
-        ## Do we need a header?
+        # Do we need a header?
         if not self._drew_header:
 
-            ## If there's enough room, draw one
+            # If there's enough room, draw one
             height = self.column_list[0].header.height
             if height < vspace:
                 self._draw_header(canvas, xoff, yoff)
@@ -192,11 +194,11 @@ class Table(object):
                 used = height + self.row_padding
 
 
-            ## Otherwise, return vspace and force a new page
+            # Otherwise, return vspace and force a new page
             else:
                 used = vspace  
                    
-        ## Do we need a row?
+        # Do we need a row?
         elif self._current_row < self.get_row_count():
             height = self.column_list[0].row.height
             if height < vspace:
@@ -206,13 +208,13 @@ class Table(object):
                
             else:
                 used = vspace
-                ## Queue up a new header too
+                # Queue up a new header too
                 self._drew_header = False
 
-        ## Do we need a footer?
+        # Do we need a footer?
         elif not self._drew_footer:
 
-            ## If there's enough room, draw one
+            # If there's enough room, draw one
             height = self.column_list[0].footer.height 
             if height < vspace:
                 self._draw_footer(canvas, xoff, yoff)
@@ -222,34 +224,34 @@ class Table(object):
             else:
                 used = vspace            
 
-        ## Otherwise we must be done
+        # Otherwise we must be done
         else:
            used = 0
 
         return used
             
-    #---------------------------------------------------------------Draw Header
+    # ---------------------------------------------------------------Draw Header
 
     def _draw_header(self, canvas, xoff, yoff):
         for column in self.column_list:
             column.draw_header(canvas, xoff, yoff)
             xoff += column.width + self.column_padding
 
-    #---------------------------------------------------------------Draw Header
+    # ---------------------------------------------------------------Draw Header
 
     def _draw_row(self, canvas, xoff, yoff, row_number):
         for column in self.column_list:
             column.draw_row(canvas, xoff, yoff, row_number, self.flag, self.row_number_flag)
             xoff += column.width + self.column_padding
 
-    #---------------------------------------------------------------Draw Footer
+    # ---------------------------------------------------------------Draw Footer
 
     def _draw_footer(self, canvas, xoff, yoff):
         for column in self.column_list:
             column.draw_footer(canvas, xoff, yoff)
             xoff += column.width + self.column_padding
 
-    #---------------------------------------------------------------Set drew_header
+    # ---------------------------------------------------------------Set drew_header
 
     def set_drew_header(self, drew_header):
         self._drew_header = drew_header

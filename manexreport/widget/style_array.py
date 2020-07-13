@@ -1,7 +1,8 @@
-#------------------------------------------------------------------------------
+
+###############################################################################
 #   file:       podunk/widget/style.py
 #   author:     Jim Storch
-#------------------------------------------------------------------------------
+###############################################################################
 
 from manexreport.prefab import color
 from manexreport.prefab import alignment
@@ -22,7 +23,7 @@ class StyleArray(object):
         self.horizontal_alignment = alignment.LEFT
         self.vertical_alignment = alignment.BOTTOM
 
-    #------------------------------------------------------------------Get Face
+    # ------------------------------------------------------------------Get Face
 
     def get_face(self):
         """
@@ -38,7 +39,7 @@ class StyleArray(object):
             face = self.font.plain
         return face
     
-    #-----------------------------------------------------------------Get Width
+    # -----------------------------------------------------------------Get Width
 
     def get_width(self, canvas, text):
         """
@@ -53,7 +54,7 @@ class StyleArray(object):
         return canvas.stringWidth(data, face, self.size) + (
             self.horizontal_padding * 2)
 
-    #----------------------------------------------------------------Get Height
+    # ----------------------------------------------------------------Get Height
 
     def get_height(self):
         """
@@ -62,7 +63,7 @@ class StyleArray(object):
         """     
         return self.size + (self.vertical_padding * 2)
 
-    #------------------------------------------------------------Get Dimensions
+    # ------------------------------------------------------------Get Dimensions
 
     def get_dimensions(self, canvas, text):
         """
@@ -73,27 +74,27 @@ class StyleArray(object):
         height = self.get_height()
         return width,height
 
-    #----------------------------------------------------------------------Draw
+    # ----------------------------------------------------------------------Draw
 
     def draw(self, canvas, text, x, y, width, height):
         
         canvas.saveState()
 
-        ## Set the font characteristics      
+        # Set the font characteristics
         canvas.setFont(self.font.bold, self.size)
         canvas.setFillColor(self.color)
 
-        ## Get the vertical alignment       
+        # Get the vertical alignment
         if self.vertical_alignment == alignment.BOTTOM:
             y_off = y + self.vertical_padding
 
         elif self.vertical_alignment == alignment.TOP:
             y_off = ( y + height ) - ( self.vertical_padding + self.size)
 
-        else: ## alignment.CENTERED
+        else: # alignment.CENTERED
             y_off = y + ( ( height / 2 ) - ( self.size / 2 ) )
 
-        ## Now the horizontal
+        # Now the horizontal
         x_off = x + self.horizontal_padding
         for index, word in enumerate(text):
             canvas.drawString(x_off, y_off, word)

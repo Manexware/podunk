@@ -1,7 +1,8 @@
-#------------------------------------------------------------------------------
+
+###############################################################################
 #   file:       podunk/widget/field.py
 #   author:     Jim Storch
-#------------------------------------------------------------------------------
+###############################################################################
 
 from manexreport.widget.box import Box
 
@@ -33,31 +34,31 @@ class Field(object):
         else:
             self.format = format_plain
     
-    #------------------------------------------------------------------Set Size    
+    # ------------------------------------------------------------------Set Size
 
     def set_size(self, width, height):
         self.width = width
         self.height = height
 
-    #-----------------------------------------------------------------Get Width
+    # -----------------------------------------------------------------Get Width
 
     def get_width(self, canvas):
         text = self.format(self.value)
         return self.style.get_width(canvas, text)       
 
-    #----------------------------------------------------------------Get Height
+    # ----------------------------------------------------------------Get Height
 
     def get_height(self):
         return self.style.get_height() 
 
-    #------------------------------------------------------------Get Dimensions
+    # ------------------------------------------------------------Get Dimensions
 
     def get_dimensions(self, canvas):
         width = self.get_width(canvas)
         height = self.get_height()
         return width,height
 
-    #----------------------------------------------------------------------Draw
+    # ----------------------------------------------------------------------Draw
 
     def draw(self, canvas, x, y):
         text = self.format(self.value)

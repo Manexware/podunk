@@ -1,7 +1,8 @@
-#------------------------------------------------------------------------------
+
+###############################################################################
 #   file:       podunk/widget/pagebreak.py
 #   author:     Manuel Vega
-#------------------------------------------------------------------------------
+###############################################################################
 
 from manexreport.prefab import alignment
 from manexreport.widget.field import Field
@@ -51,7 +52,7 @@ class PageBreak(object):
         else:
             self._drew_title = False
 
-    #-----------------------------------------------------------------Draw Some
+    # -----------------------------------------------------------------Draw Some
 
     def draw_some(self, canvas, left, right, yoff, vspace):
         if not self._drew_skip:
@@ -62,21 +63,20 @@ class PageBreak(object):
                 used = vspace
             self._drew_skip = True
 
-
         elif not self._drew_title:
             height = self.field.get_height()
-            ## Is there enought room for the title?
+            # Is there enought room for the title?
             if height < vspace:
                 self.field.width = right - left
                 self.field.draw(canvas, left, yoff)
                 self._drew_title = True
                 used = vspace
 
-            ## If not, force a new page
+            # If not, force a new page
             else:
                 used = vspace
 
-        ## We're done
+        # We're done
         else:
             used = 0
 
